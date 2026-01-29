@@ -35,19 +35,4 @@ daten <- daten[, -which(names(daten) %in% c("PassengerId", "Name", "Ticket", "Ca
 # daten.csv
 write.csv(daten, "daten.csv", row.names = FALSE, na = "")
 
-summary(daten)
-
-table(daten$Survived)
-prop.table(table(daten$Survived))
-
-table(daten$Sex)
-table(daten$Pclass)
-table(daten$Embarked)
-
-t1 <- prop.table(table(daten$Sex, daten$Survived), margin = 1); t1
-t2 <- prop.table(table(daten$Pclass, daten$Survived), margin = 1); t2
-t3 <- prop.table(table(daten$Embarked, daten$Survived), margin = 1); t3
-
-barplot(t1, beside = TRUE, legend = TRUE, main = "Survival by Sex", ylab = "Relative frequency")
-barplot(t2, beside = TRUE, legend = TRUE, main = "Survival by Class", ylab = "Relative frequency")
-barplot(t3, beside = TRUE, legend = TRUE, main = "Survival by Embarkation Port", ylab = "Relative frequency")
+#task 1 is done
