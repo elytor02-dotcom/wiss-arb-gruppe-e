@@ -2,6 +2,9 @@ source("helfer.R")
 library(ggplot2)
 
 # i. Metrische Deskription
+#Wir geben Lage- und Streuungsmaße aus (Mittelwert, Median, Standardabweichung)
+#sowie Quantile. Dadurch erhält man einen schnellen Überblick über die 
+#Verteilung und deren Streuung.
 desk_metrisch <- function(df, spalte) {
   stats <- get_stats(df[[spalte]]) # Nutzt den Helfer
   cat("Deskription für", spalte, ":\n")
@@ -11,6 +14,8 @@ desk_metrisch <- function(df, spalte) {
 }
 
 # ii. Kategoriale Deskription
+#Für kategoriale Variablen sind Häufigkeitstabellen und relative Anteile am
+#sinnvollsten, weil sie die Verteilung der Kategorien direkt zeigen.
 desk_kategorial <- function(df, spalte) {
   tab <- table(df[[spalte]], useNA = "ifany")
   prop <- prop.table(tab) * 100
@@ -19,6 +24,9 @@ desk_kategorial <- function(df, spalte) {
 }
 
 # iii. Bivariat: Zwei kategoriale Variablen
+#Bei zwei kategorialen Variablen nutzen wir eine Kreuztabelle zur gemeinsamen 
+#Verteilung. Wir verwenden den Chi-Quadrat-Test, um zu prüfen, ob die Variablen
+#unabhängig sind.
 bivariat_kat <- function(df, var1, var2) {
   tab <- table(df[[var1]], df[[var2]])
   
@@ -29,6 +37,9 @@ bivariat_kat <- function(df, var1, var2) {
 }
 
 # iv. Bivariat: Metrisch & Dichotom
+#Für metrisch und dichotom ist es sinnvoll, die metrische Variable getrennt 
+#nach den Gruppen zu beschreiben. Wir nutzen einen t-Test, um zu prüfen, ob 
+#sich die Mittelwerte zwischen den zwei Gruppen unterscheiden.
 bivariat_metr_dichotom <- function(df, metr_var, dich_var) {
   
   # Nutzt den Helfer get_stats für jede Gruppe
@@ -42,6 +53,9 @@ bivariat_metr_dichotom <- function(df, metr_var, dich_var) {
 }
 
 # v. Visualisierung: 3-4 kategoriale Variablen
+#Mit geom_bar(position="fill") visualisieren wir Anteile
+#(relative Häufigkeiten), damit Gruppen mit unterschiedlichen Stichprobengrößen
+#vergleichbar sind.
 plot_multi <- function(df, x_var, fill_var, facet_var1, facet_var2 = NULL) {
   p <- ggplot(df, aes_string(x = x_var, fill = fill_var)) +
     geom_bar(position = "fill") +
