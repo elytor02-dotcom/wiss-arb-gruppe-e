@@ -1,8 +1,10 @@
 source("helfer.R")
 library(ggplot2)
 
-# i. Funktion für deskriptive Statistiken metrischer Variablen
-# Berechnet Lage- und Streuungsmaße sowie Quantile für metrische Daten.
+# i. Metrische Deskription
+# Wir geben Lage- und Streuungsmaße aus (Mittelwert, Median, Standardabweichung)
+# sowie Quantile. Dadurch erhält man einen schnellen Überblick über die 
+# Verteilung und deren Streuung.
 desk_metrisch <- function(df, spalte) {
   stats <- get_stats(df[[spalte]]) # Aufruf der Helfer-Funktion
   cat("--- Deskription metrisch (", spalte, ") ---\n")
@@ -12,8 +14,9 @@ desk_metrisch <- function(df, spalte) {
   cat("\n\n")
 }
 
-# ii. Funktion für deskriptive Statistiken kategorialer Variablen
-# Erstellt Häufigkeitstabellen (absolut und prozentual) für Faktoren.
+# ii. Kategoriale Deskription
+# Für kategoriale Variablen sind Häufigkeitstabellen und relative Anteile am
+# sinnvollsten, weil sie die Verteilung der Kategorien direkt zeigen.
 desk_kategorial <- function(df, spalte) {
   tab <- table(df[[spalte]], useNA = "ifany")
   prop <- prop.table(tab) * 100
@@ -23,8 +26,10 @@ desk_kategorial <- function(df, spalte) {
   cat("\n\n")
 }
 
-# iii. Funktion für bivariate Statistiken (zwei kategoriale Variablen)
-# Erstellt eine Kreuztabelle und prüft die Unabhängigkeit mittels Chi-Quadrat-Test.
+# iii. Bivariat: Zwei kategoriale Variablen
+# Bei zwei kategorialen Variablen nutzen wir eine Kreuztabelle zur gemeinsamen 
+# Verteilung. Wir verwenden den Chi-Quadrat-Test, um zu prüfen, ob die Variablen
+# unabhängig sind.
 bivariat_kat <- function(df, var1, var2) {
   tab <- table(df[[var1]], df[[var2]])
   test <- chisq.test(tab)
@@ -33,9 +38,10 @@ bivariat_kat <- function(df, var1, var2) {
   cat("\nStatistischer Zusammenhang (p-Wert):", test$p.value, "\n\n")
 }
 
-# iv. Funktion für bivariate Statistiken (metrisch & Gruppierungsvariable)
+# iv. Bivariat: Metrisch & Gruppierungsvariable
 # Wenn die Gruppierungsvariable genau 2 Gruppen hat -> t-Test
 # Wenn die Gruppierungsvariable mehr als 2 Gruppen hat -> ANOVA
+# um zu prüfen, ob sich die Mittelwerte zwischen den Gruppen unterscheiden.
 bivariat_metr_dichotom <- function(df, metr_var, dich_var) {
   
   # Nur die zwei relevanten Spalten nehmen
@@ -73,9 +79,10 @@ bivariat_metr_dichotom <- function(df, metr_var, dich_var) {
   
   cat("\n\n")
 }
-
-# v. Funktion für die Visualisierung von drei oder vier kategorialen Variablen
-# Erstellt ein Balkendiagramm (prozentual gestapelt) mit Facetten.
+# v. Visualisierung: 3-4 kategoriale Variablen
+# Mit geom_bar(position="fill") visualisieren wir Anteile
+# (relative Häufigkeiten), damit Gruppen mit unterschiedlichen Stichprobengrößen
+# vergleichbar sind.
 plot_multi <- function(df, x_var, fill_var, facet_var1, facet_var2 = NULL) {
   p <- ggplot(df, aes(x = .data[[x_var]], fill = .data[[fill_var]])) +
     geom_bar(position = "fill") +
@@ -101,3 +108,4 @@ plot_multi <- function(df, x_var, fill_var, facet_var1, facet_var2 = NULL) {
   return(p)
 }
 
+          
