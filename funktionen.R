@@ -1,3 +1,5 @@
+#Funktionen-Toolbox:
+
 source("helfer.R")
 library(ggplot2)
 
@@ -79,6 +81,7 @@ bivariat_metr_dichotom <- function(df, metr_var, dich_var) {
   
   cat("\n\n")
 }
+
 # v. Visualisierung: 3-4 kategoriale Variablen
 # Mit geom_bar(position="fill") visualisieren wir Anteile
 # (relative Häufigkeiten), damit Gruppen mit unterschiedlichen Stichprobengrößen
@@ -107,5 +110,3 @@ plot_multi <- function(df, x_var, fill_var, facet_var1, facet_var2 = NULL) {
   
   return(p)
 }
-
-          

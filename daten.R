@@ -1,4 +1,5 @@
-# Titanic-Datensatz
+# Titanic-Datensatz-Aufbereitung:
+
 daten <- read.csv("titanic.csv", na.strings = "")
 
 # Anrede
@@ -56,4 +57,3 @@ daten <- daten[, -which(names(daten) %in% c("PassengerId", "Name", "Ticket", "Ca
 
 # daten.csv speichern
 write.csv(daten, "daten.csv", row.names = FALSE, na = "")
-
