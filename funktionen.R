@@ -74,6 +74,9 @@ bivariat_metr_dichotom <- function(df, metr_var, dich_var) {
     cat("\nANOVA (mehr als 2 Gruppen):\n")
     modell <- aov(tmp[[metr_var]] ~ tmp[[dich_var]], data = tmp)
     print(summary(modell))
+    
+  } else {
+    cat("\nKein Test möglich: weniger als 2 Gruppen vorhanden.\n")
   }
   
   cat("\n\n")
@@ -84,7 +87,7 @@ bivariat_metr_dichotom <- function(df, metr_var, dich_var) {
 # (relative Häufigkeiten), damit Gruppen mit unterschiedlichen Stichprobengrößen
 # vergleichbar sind.
 plot_multi <- function(df, x_var, fill_var, facet_var1, facet_var2 = NULL) {
-  p <- ggplot(df, aes_string(x = x_var, fill = fill_var)) +
+  p <- ggplot(df, aes(x = .data[[x_var]], fill = .data[[fill_var]])) +
     geom_bar(position = "fill") +
     scale_y_continuous(labels = scales::percent) +
     labs(
@@ -98,6 +101,7 @@ plot_multi <- function(df, x_var, fill_var, facet_var1, facet_var2 = NULL) {
     ) +
     theme_minimal()
   
+  # Bedingung für 3 oder 4 Variablen (facet_wrap vs facet_grid)
   if (is.null(facet_var2)) {
     p <- p + facet_wrap(as.formula(paste("~", facet_var1)))
   } else {
