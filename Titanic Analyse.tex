@@ -1,0 +1,222 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{graphicx}
+\begin{document}
+	
+			\part*{Analyse Datensatz Titanic
+								Bericht}\
+\section{Einleitung}Unser Ziel war es herauszustellen welche Passagiere den
+Untergang am häufigsten überlebt haben.
+
+Außerdem wollten wir noch schauen ob es Unterschiede bei
+den Ticketpreisen gab.
+\section{Daten}
+\subsection{Aufzählung}
+Zur Verfügung standen uns 11 verschiedene Daten über jeden Passagier
+auf dem Schiff
+
+\textbf{Survived}
+
+Ob die Person überlebt hat oder nicht
+
+\textbf{Pclass}
+
+In welcher Preisklasse die Person untergebracht war
+
+\textbf{Sex}
+
+Das Geschlecht der Person
+
+\textbf{Age}
+
+Das Alter der Person
+
+\textbf{SibSp}
+
+Die Anzahl der Geschwister und Ehefrauen an Bord
+
+\textbf{Parch}
+
+Die Anzahl der Eltern und Kinder an Bord
+
+\textbf{Fare}
+
+Der Preis des Tickets
+
+\textbf{Embarked}
+
+Der Zustiegshafen
+
+\textbf{Anrede}
+
+Die Anrede der Person
+
+\textbf{Bord}
+
+An welchem Bord sich die Kabine befindet
+
+\textbf{Deck}
+
+An welchem Deck sich die Kabine befindet
+
+\subsection{Bewertung}
+
+Wir haben einige dieser Daten als unbrauchbar empfunden
+
+\textit{Anrede} ist in den meisten Fällen das gleiche wie \textit{Sex}
+
+\textit{Deck} und\textit{Bord} hat in über 75 Prozent der Daten
+ein NA stehen
+
+\textit{SibSp} und \textit{Parch} beinhalten 2 verschiedene Daten 
+die zu einem vereint wurden und es ist schwierig daraus vernünftige Schlussfolgerungen zu schließen.
+
+
+Außerdem haben wir die Daten von \textit{Age} und von \textit{Fare} klassiert damit sie sich anschaulicher darstellen lassen
+
+Als Klassen haben wir bei \textit{Age} gewählt 
+
+\textbf{[0-12] = Kinder}
+
+\textbf{(12-21] = Jugendlich}
+
+\textbf{(21-50] = Erwachsene}
+
+\textbf{(50+) = Ältere}
+
+Und bei \textit{Fare}
+
+\textbf{[0-30] = Low}
+
+\textbf{(30-100] = Medium}
+
+\textbf{(100+) = High}
+
+
+	
+	\section{Überlebensrate}
+	\subsection{Hypothese}
+	Unsere Hypothese ist, dass einerseits Frauen und Kinder
+	wahrscheinlicher überlebt habe und andererseits Passagiere 
+	der ersten Klasse wahrscheinlich auch
+	
+	\subsection{Auswertung}
+	Als erstes schauen wir uns den Zusammenhang von Geschlecht und Überlebensrate an
+	
+	\begin{tabular}{c c c}
+		  & female & male \\
+		Ja & 233 & 109 \\
+		Nein & 81 & 468 \\
+	\end{tabular}
+	
+	Es sieht ganz danach aus als ob das Geschlecht einen sehr großen Einfluss auf das Überleben hat 
+	
+	Nun das gleiche mit der Klasse
+	
+		\begin{tabular}{c c c c}
+		& 1 & 2 & 3\\
+		Ja & 136 & 87 & 119 \\
+		Nein & 80 & 97 & 372 \\
+	\end{tabular}
+	
+	Das sieht ebenfalls so aus als würde unsere These stimmen, aber es könnte ja sein, dass die meisten Frauen erste Klasse waren und die meisten Männer 3 Klasse von daher vergleichen wir die beiden Daten nochmal gleichzeitig
+	
+	\includegraphics[width=0.9\textwidth]{Sex_Survived_Pclass.png}
+	
+	Man sieht deutlich, dass die Überlebensrate in allen 3 Klassen bei den weiblichen Personen höher ist und bei beiden Geschlechtern je nach Klasse höher ist.
+	
+	Das durchschnittliche Alter von Überlebenden Personen ist 28 während das von den verschiedenen Personen bei
+	30 liegt.
+	
+	Es könnte aber auch sein, dass zum Beispiel Ältere Leute eher sterben weil sie es zum Beispiel schlechter zu den Rettungsbooten schaffen. Deswegen testen wir es nochmal mit den klassierten Daten.
+	
+	\begin{tabular}{c c c c c}
+		& Kinder & Jugendliche & Erwachsene & Ältere\\
+		Ja & 42 & 69 & 209 & 22 \\
+		Nein & 31 & 102 & 374 & 42 \\
+	\end{tabular}
+	
+	Man kann sehen es sind tatsächlich die Kinder, die eher überleben.
+	
+	Nun stellen wir noch einmal alle Daten zusammen in einer Grafik dar:
+	
+		\includegraphics[width=0.9\textwidth]{Sex_Survived_Pclass_Age.png}
+		
+	Das meiste sieht wie erwartet aus. Bei den Kindern scheint das Geschlecht kaum einen Einfluss zu haben
+	
+	Das einzige was raussticht sind die Mädchen der ersten Klasse die eigentlich die höchste Überlebensrate haben müssten aber 0 Prozent haben.
+	Das liegt allerdings daran, dass es nur eine Person gibt auf die alle 3 Eigenschaften zutrifft von daher ist es ein Einzelfall und eher nicht relevant
+	
+	Nun haben wir noch die Zustiegshäfen. Da in den verschiedenen Häfen unterschiedliche Verteilungen von Leuten zusteigen schauen wir uns die Daten zusammen mit der Klasse und dem Geschlecht an:
+	
+	\includegraphics[width=0.9\textwidth]{Sex_Survived_Embarked_Pclass.png}
+	
+	In den meisten Fällen stich nichts raus, nur vielleicht die Frauen aus Southampton scheinen etwas weniger zu überleben
+	
+	\subsection{Fazit}
+	Wie erwartet sind Frauen und Kinder diejenigen die am meisten überlebt haben, und die Klasse scheint auch einen großen Einfluss zu haben
+	
+	\section{Ticketpreis}
+	\subsection{Hypothese}
+	Wir vermuten, dass die Klasse bei weitem den größten Einfluss  auf den Preis haben wird und eventuell haben es Kinder noch ein wenig günstiger
+	\subsection{Auswertung}
+	Der durchschnittliche Ticketpreis der ersten Klasse beträgt ungefähr 84(Median 60). 
+	
+	In der zweiten Klasse 21(14) 
+	
+	Und in der dritten 14(8)
+	
+	Es gibt also eindeutige Preisunterschiede bei den Klassen wobei 2 und 3 noch relativ nah beinander liegen im Vergleich zu 1
+	
+	Bei den Kindern zahlt der Durchschnitt 32(26)
+	
+	Bei den Jugendlichen 27(9)
+	
+	Bei den Erwachsenen 32(13)
+	
+	Und bei den Älteren 44(28)
+	
+	Da der zwischen den Preisen von 1 Klasse und den anderen Klassen ein sehr großer Unterschied liegt halten wir den Median für Aussagekräftiger und da liegen die Kinder deutlich über den Erwachsenen also ist genau das Gegenteil von unserer Hypothese der Fall.
+	
+	Um es noch einmal zu überprüfen vergleichen wir es nochmal unabhängig voneinander:
+	
+	\includegraphics[width=0.9\textwidth]{Age_Fare_Pclass.png}
+	
+	Tatsächlich zahlen Kinder in allen 3 Klassen am meisten und je älter desto weniger wird bezahlt.
+	
+	Nun schauen wir uns nochmal die übrigen Daten an:
+	
+	\includegraphics[width=0.9\textwidth]{Pclass_Fare_Sex_Embarked.png}
+		
+		Männer zahlen in der Regel etwas weniger in der ersten Klasse.
+		Und Passagiere aus Cherbourg zahlen in erster und zweiter Klasse mehr und
+		Passagiere aus Southampton zahlen etwas mehr in der dritten Klasse
+		In Queenstown is kaum jemand etwas anderes als 3 Klasse gefahren von daher
+		Sollte man das weg lassen.
+		
+		Zum Schluss testen wir noch ob mehr bezahlen unabhängig von der Klasse und 
+		Geschlecht die Überlebensrate erhöht:
+		
+		\includegraphics[width=0.9\textwidth]{Pclass_Survived_Fare_Sex.png}
+		
+		tatsächlich sieht es eher so aus als würde in der dritten Klasse mehr bezahlen
+		die Überlebenswahrscheinlichkeit von Frauen eher verringern.
+		Es sind jedoch nur 16 Personen auf die das zutrifft von daher nicht so repräsentativ wie gewünscht
+		
+		\subsection{Fazit}
+		Wie erwartet hat die Klasse den höchsten Einfluss aber entgegen unserer Erwartungen zahlen Kinder mehr als Erwachsene, dazu gibt es noch einige leichte Unterschiede beim Geschlecht und beim Hafen
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+\end{document}\\
