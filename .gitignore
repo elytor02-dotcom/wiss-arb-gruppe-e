@@ -2,6 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-*.log
-*.aux
-*.synctex.gz
+.log
+.aux
+.synctex.gz
