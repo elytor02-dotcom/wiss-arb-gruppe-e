@@ -52,7 +52,9 @@ bivariat_kat(daten, "Pclass", "Sex")
 #In der dritten Klasse gibt es jedoch auch deutlich mehr männliche als weibliche Personen
 #vergleichen wir beides zusammen
 
+png("Sex_Survived_Pclass.png", width = 800, height = 600)
 plot_multi(daten, "Sex","Survived", "Pclass")
+dev.off()
 
 #Man kann deutlich sehen es haben mehr weibliche Personen aus der dritten Klasse
 #überlebt als männliche aus der ersten, aber auch deutlich mehr männliche aus der
@@ -104,7 +106,9 @@ bivariat_kat(daten, "Age_class","Sex")
 
 #Vergleiche wir alle 3 Daten zusammen in Bezug auf Überlebensrate
 
+png("Sex_Survived_Pclass_Age.png", width = 800, height = 600)
 plot_multi(daten, "Sex","Survived", "Pclass", "Age_class")
+dev.off()
 
 #Was erstmal seltsam ist, ist das Mädchen der ersten Klasse zu 100%
 #gestorben sind obwohl sie eigentlich am sichersten sein sollen testen wir einmal
@@ -142,7 +146,9 @@ plot_multi(daten, "Sex", "Embarked", "Age_class", "Pclass")
 #mögliche Unterschiede die sich beim Zustiegshafen feststellen lassen sind 
 #wahrscheinlich darauf zurückzuführen machen wir den test
 
+png("Sex_Survived_Embarked_Pclass.png", width = 800, height = 600)
 plot_multi(daten, "Sex","Survived", "Embarked", "Pclass")
+dev.off()
 
 #Es ergeben sich kaum Unterschiede außer vielleicht, dass die Überlebensrate von Frauen 
 #Aus der dritten Klasse aus Southampton etwas geringer ist
@@ -170,7 +176,9 @@ bivariat_metr_dichotom(daten, "Fare","Age_class")
 #tatsächlich zahlt der Median der Kinder sogar mehr als der Erwachsene
 #Vergleichen wir es zusammen mit der Klasse:
 
+png("Age_Fare_Pclass.png", width = 800, height = 600)
 plot_multi(daten,"Age_class","Fare_class", "Pclass")
+dev.off()
 
 #tatsächlich zahlen Kinder in allen 3 Klassen mehr als die anderen und Ältere 
 #Menschen etwas weniger
@@ -188,7 +196,9 @@ sort(table(daten$Fare), decreasing = TRUE)[1:5]
 
 #vergleichen wir es noch mit dem Einstieghafen und dem Geschlecht
 
+png("Pclass_Fare_Sex_Embarked.png", width = 800, height = 600)
 plot_multi(daten, "Pclass","Fare_class","Sex","Embarked")
+dev.off()
 
 #Männer zahlen in der Regel etwas weniger in der ersten Klasse
 #Und Passagiere aus Cherbourg zahlen in erster und zweiter Klasse mehr und
@@ -198,7 +208,9 @@ plot_multi(daten, "Pclass","Fare_class","Sex","Embarked")
 #Zum Schluss testen wir noch ob mehr bezahlen unabhängig von der Klasse und 
 #Geschlecht die Überlebensrate erhöht
 
+png("Pclass_Survived_Fare_Sex.png", width = 800, height = 600)
 plot_multi(daten, "Pclass","Survived","Fare_class", "Sex")
+dev.off()
 
 #tatsächlich sieht es eher so aus als würde in der dritten Klasse mehr bezahlen
 #die Überlebenswahrscheinlichkeit von Frauen eher verringern
@@ -207,3 +219,4 @@ sum(daten$Sex == "female" & daten$Pclass == "3" & daten$Fare_class == "medium")
 sum(daten$Sex == "female" & daten$Pclass == "3" & daten$Fare_class == "low")
 
 #Aber bei 16 Daten ist das vielleicht nicht ganz so repäsentativ.
+
