@@ -1,5 +1,11 @@
-.Rproj.user
-.Rhistory
+# R-Dateien
 .RData
-.Ruserdata
+.Rhistory
+.Rproj.user/
 
+# LaTeX-Hilfsdateien
+*.aux
+*.log
+*.toc
+*.out
+*.pdf
