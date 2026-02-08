@@ -4,7 +4,6 @@
 #get_stats berechnet gleichzeitig Lage- und Streuungsmaße und reduziert dadurch
 #redundanten Code. Außerdem erleichtert die Funktion spätere Änderungen an den
 #verwendeten Kennzahlen.
-
 get_stats <- function(vektor) {
   res <- list(
     Mittelwert = mean(vektor, na.rm = TRUE),
@@ -14,3 +13,5 @@ get_stats <- function(vektor) {
   )
   return(res)
 }
+
+
